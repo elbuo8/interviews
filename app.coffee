@@ -6,7 +6,6 @@ express = require("express")
 http = require("http")
 path = require("path")
 mongo = (require 'mongodb').MongoClient
-#(require 'console-trace') {always:true}
 
 app = express()
 
