@@ -11,6 +11,8 @@
     "mongodb": "~1.2.14",
     "connect-mongo": "~0.3.2",
     "console-trace": "~0.2.1",
-    "coffee-script": "~1.6.1"
+    "coffee-script": "~1.6.1",
+    "passport": "~0.1.16",
+    "passport-local": "~0.1.6"
   }
 }

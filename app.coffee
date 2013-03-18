@@ -36,6 +36,7 @@ app.configure "development", ->
 user = require('./api/user')
 
 # Handle user registration
+app.get "/registration", (req, res) -> res.render('registration');
 app.post "/registration", user.registration
 
 http.createServer(app).listen app.get("port"), ->
