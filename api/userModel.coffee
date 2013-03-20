@@ -1,4 +1,5 @@
 crypto = require 'crypto'
+ObjectID = (require 'mongodb').ObjectID
 
 class userModel
   constructor: (@users) ->
@@ -17,6 +18,15 @@ class userModel
       if(req.body.password === user.password) 
         req.session._id = user._id
         res.redirect '/'
-        
+  
+  logout: (req, res) =>
+    delete req.session._id
+    res.redirect '/'
     
+  
+  editProfile: (req, res) =>
+    @users.update {_id: new ObjectID req.session._id}, {$set:{req.body}}, (error) ->
+      res.send "OK"
+      
+  
 module.exports = userModel
