@@ -19,6 +19,9 @@ app.configure () ->
   app.use express.logger("dev")
   app.use express.bodyParser()
   app.use express.methodOverride()
+  app.use express.cookieParser 'aloha'
+  app.use express.session { secret: 'aloha', cookie: { maxAge: 60000 } }
+
   app.use app.router
   app.use express.static(path.join(__dirname, "public"))
   
@@ -33,9 +36,11 @@ app.configure () ->
             # Handle user registration
             app.get "/registration", (req, res) -> res.render('registration');
             app.post "/registration", user.registration
-            #app.get "/login", (req, res) -> res.render('login')
-            #app.post "/login", user.login
-            #app.post '/logout', user.logout
+            app.get "/login", (req, res) -> res.render('login')
+            app.post "/login", user.login
+            app.post '/logout', user.logout
+            app.get '/', user.auth, user.getProfile
+            app.get
           
         else 
           console.log error
