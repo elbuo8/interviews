@@ -30,9 +30,9 @@ class userModel
       
   getProfile: (req, res) =>
     @users.findOne {_id: new ObjectID req.session._id}, (error, user) ->
-      #res.render 'profile', user
+      res.render 'profile', {owner: req.session._id, profile: user}
       
   auth: (req, res, next) =>
-    if req.session._id then next else res.redirect '/'
+    if req.session._id then next() else res.render 'main'
     
 module.exports = userModel

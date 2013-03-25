@@ -38,9 +38,9 @@ app.configure () ->
             app.post "/registration", user.registration
             app.get "/login", (req, res) -> res.render('login')
             app.post "/login", user.login
-            app.post '/logout', user.logout
-            app.get '/', user.auth, user.getProfile
-            app.get
+            app.get '/logout', user.logout
+            app.get '/', (req, res) -> res.render('index')
+            app.get '/profile' user.auth, user.getProfile
           
         else 
           console.log error
