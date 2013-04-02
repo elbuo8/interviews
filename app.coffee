@@ -34,13 +34,13 @@ app.configure () ->
             #Initialize models
             user = new userModel collection
             # Handle user registration
-            app.get "/registration", (req, res) -> res.render('registration');
+            app.get "/registration", (req, res) -> res.render('registration') 
             app.post "/registration", user.registration
             app.get "/login", (req, res) -> res.render('login')
             app.post "/login", user.login
             app.get '/logout', user.logout
-            app.get '/', (req, res) -> res.render('index')
-            app.get '/profile' user.auth, user.getProfile
+            app.get '/', (req, res) -> res.render('index', {user: req.session._id})
+            app.get '/profile', user.auth, user.getProfile
           
         else 
           console.log error
