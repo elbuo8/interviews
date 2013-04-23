@@ -1,6 +1,15 @@
 #header {
 	width: 100%;
 	float: left;
+	/*background-color: #F1F1F1;
+	background-image: -moz-linear-gradient(top, white, #F1F1F1);
+	background-image: -ms-linear-gradient(top, white, #F1F1F1);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#F1F1F1));
+	background-image: -webkit-linear-gradient(top, white, #F1F1F1);
+	background-image: -o-linear-gradient(top, white, #F1F1F1);
+	background-image: linear-gradient(top, white, #F1F1F1);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#FFDCDCDC', GradientType=0);*/
 	background-color: #3d94f5;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#3d94f5), to(#0066d0));
 	background-image: -webkit-linear-gradient(top, #3d94f5, #0066d0);
@@ -8,46 +17,83 @@
 	background-image: -o-linear-gradient(top, #3d94f5, #0066d0);
 	background-image: -ms-linear-gradient(top, #3d94f5, #0066d0);
 	background-image: linear-gradient(top, #3d94f5, #0066d0);
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#3d94f5', EndColorStr='#0066d0');
 	text-shadow: 0 -1px rgba(0,0,0,0.5);
 	-webkit-background-size: auto,contain;
 	-moz-background-size: auto,contain;
 	-ms-background-size: auto,contain;
 	-o-background-size: auto,contain;
 	background-size: auto,contain;
+	box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.35);
+	-webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.35);
+	-moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.35);
+	-o-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.35);
 }
 
 #header ul {
 	margin: 0;
 	list-style: none;
+	float:left;
+	width:100%;
 }
 
 #header ul li {
 	float: left;
 }
 
-#title {
-	color: white;
-	text-align: left;
-	font-weight: 400;
-	font-size: 16px;
-	padding: 10px 20px;
+#header h1 {
+	height: 90px;
+}
+
+h1 .image-logo {
+	width:400px;
+	padding:20px 0;
 }
 
 #header ul .navigation-links {
 	float: right;
-	height: 56px;
+	height: 90px;
 }
 
 .navigation-links a {
 	cursor: pointer;
 	text-decoration: none;
-	line-height: 56px;
+	line-height: 90px;
 	color: white;
-	font-size: 14px;
+	font-size: 1em;
 	font-weight: normal;
 	padding: 0 25px;
+	font-family: "Proxima Nova";
 }
+
+/* MAIN PAGE */
+
+.main-image {
+	height: 630px;
+	background: #131313 url(../images/photo-pitch.jpg) no-repeat center center;
+	background-size: 1759px 687px;
+	position: relative;
+	z-index: -99;
+	padding-top: 90px;
+}
+
+.headline {
+	padding: 8em 0;
+	background: #333439;
+}
+
+.headline .inside {
+	padding: 0 4%;
+}
+
+.headline h2 {
+	color: #fff;
+	font-size: 2.6em;
+	line-height: 2em;
+	text-align: center;
+	font-family: "Proxima Nova";
+}
+
+/* CREATE ACCOUNT PAGE - LOGIN */
 
 .sign-in {
 	width: 590px;

@@ -4,20 +4,28 @@ html
     title= "SkedIt"
     link(rel='stylesheet', href='stylesheets/reset.css')
     link(rel='stylesheet', href='stylesheets/style.css')
-    script(async src='components/jquery/jquery.min.js')
+    link(rel='text/javascript', href='js/typekit.js')
+
 
   body
     div#header
-      ul
-        li
-          h1#title College Hack
-        if typeof(user) == 'undefined'
-          li.navigation-links
-            a(href='/registration', title='Create an Account') Sign Up
-          li.navigation-links
-            a(href='/login', title='Login in your Account') Login
-        else
-          li.navigation-links
-            a(href='/logout', title='Logout of your Account') Logout
+      div.container
+        div.row-fluid
+          ul
+            li
+              h1
+                img.image-logo(src='images/logo-pitch.png')
+            if typeof(user) == 'undefined'
+              li.navigation-links
+                a(href='/registration', title='Create an Account') Sign Up
+              li.navigation-links
+                a(href='/login', title='Login in your Account') Login
+            else
+              li.navigation-links
+                a(href='/logout', title='Logout of your Account') Logout
+            li.navigation-links
+              a(href='/employers', title='Employers') Employers
+            li.navigation-links
+              a(href='/learnmore', title='Learn More') Learn More
     block content
     block script
