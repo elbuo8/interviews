@@ -8,11 +8,8 @@
   "dependencies": {
     "express": "*",
     "jade": "*",
-    "connect-mongo": "~0.3.2",
-    "console-trace": "~0.2.1",
     "coffee-script": "~1.6.1",
-    "mongoose": "~3.6.0",
-    "mongodb": "~1.2.14",
-    "coffee-trace": "~1.3.4"
+    "mongodb": "*",
+    "coffee-trace": "*"
   }
 }
