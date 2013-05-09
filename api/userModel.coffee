@@ -6,12 +6,14 @@ class userModel
 
   registration: (req, res) =>
     # 1. Check for duplicates in email or username
+    # 2. Error messages with feedback
     req.body.password = crypto.createHash('sha1').update(req.body.password).digest('hex')
     @users.insert req.body, (error, result) -> #result viene en forma de array
       req.session._id = result[0]._id
       res.redirect '/editprofile'
 
   login: (req, res) =>
+    # 1. Feedback for wrong information
     console.log req.body
     @users.findOne {username: req.body.username}, {password:1}, (error, user) ->
       if user is null

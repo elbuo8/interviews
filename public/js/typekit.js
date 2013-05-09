@@ -1,4 +1,3 @@
-
   (function() {
     var config = {
       kitId: 'xyi1sbf',
