@@ -35,7 +35,7 @@ class userModel
   getProfile: (req, res) =>
     @users.findOne {_id: new ObjectID req.session._id}, (error, user) ->
       #console.log user, req.session._id
-      res.render 'profile', {user: req.session._id, profile: user}
+      res.render 'ProfileView', {user: req.session._id, profile: user}
 
   auth: (req, res, next) =>
     if req.session._id then next() else res.redirect '/'
