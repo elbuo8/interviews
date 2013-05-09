@@ -24,7 +24,7 @@ app.configure () ->
 
   app.use app.router
   app.use express.static(path.join(__dirname, "public"))
-  
+
 	# Connect to the db
   mongo.connect process.env.MONGOHQ_URL, (err, db) ->
       db.authenticate process.env.MONGOHQ_USER, process.env.MONGOHQ_PWD, (error) ->
@@ -34,17 +34,18 @@ app.configure () ->
             #Initialize models
             user = new userModel collection
             # Handle user registration
-            app.get "/registration", (req, res) -> res.render('registration') 
+            app.get "/registration", (req, res) -> res.render('registration')
             app.post "/registration", user.registration
             app.get "/login", (req, res) -> res.render('login')
             app.post "/login", user.login
             app.get '/logout', user.logout
             app.get '/', (req, res) -> res.render('index', {user: req.session._id})
             app.get '/profile', user.auth, user.getProfile
-          
-        else 
+            app.get '/editprofile', user.auth, user.editProfileView
+
+        else
           console.log error
-  
+
 app.configure "development", ->
   app.use express.errorHandler()
 
