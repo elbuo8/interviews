@@ -12,7 +12,10 @@ class userModel
       res.redirect '/editprofile'
 
   login: (req, res) =>
+    console.log req.body
     @users.findOne {username: req.body.username}, {password:1}, (error, user) ->
+      if user is null
+        res.redirect '/login'
       req.body.password = crypto.createHash('sha1').update(req.body.password).digest('hex')
       if(req.body.password is user.password)
         req.session._id = user._id
