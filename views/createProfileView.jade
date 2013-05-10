@@ -10,6 +10,10 @@ block content
             form(action='/editprofile/photo', class='dropzone', id='profilePic')
             p Drop your profile here if you want to update it!
 
+        div#skills
+            for tag in tags
+                p #{tag.tag}
+
         div#hours
             input#addHour(type='button', value='Add date')
 
@@ -56,6 +60,7 @@ block content
                 dayId = $('#dayId' + index).val()
                 if _.has hours, dayId
                     hours[dayId].push $('#hourId' + index).val()
+                    hours[dayId] = _.uniq hours[dayId]
                 else
                     hours[dayId] = [$('#hourId' + index).val()]
             console.log hours
