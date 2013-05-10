@@ -1,0 +1,41 @@
+include layout
+block content
+    script(src='js/dropzone.js')
+    script(src='/components/jquery/jquery.min.js')
+    div#photo
+        //thumbnail de esto es del user.
+        form(action='/editprofile/photo', class='dropzone', id='profilePic')
+        p Drop your profile here if you want to update it!
+
+    div#skills
+        p Write your skills separated by commas
+        textarea#skillList
+
+    div#save
+        input(type='button', value='Save')
+
+
+    :coffeescript
+        Dropzone.options.profilePic =
+            init: ->
+                this.on 'success', (file, data) ->
+                    console.log data
+                #adjust el box para que sea el que se guardo
+        document.getElementById('save').onclick = (e) ->
+            json = {}
+
+            skills = document.getElementById('skillList').value.toLowerCase().split(',')
+            skillList = {}
+            skillList[skill] = 5 for skill in skills
+            json['skills'] = skillList
+
+            $.post '/createprofile', (res) ->
+                console.log res
+
+
+
+
+
+
+
+
