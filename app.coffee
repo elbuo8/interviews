@@ -41,7 +41,9 @@ app.configure () ->
             app.get '/logout', user.logout
             app.get '/', (req, res) -> res.render('index', {user: req.session._id})
             app.get '/profile', user.auth, user.getProfile
-            app.get '/editprofile', user.auth, user.editProfileView
+            app.get '/createprofile', user.auth, user.createProfileView
+            app.get '/createprofile', user.auth, user.createProfile
+            app.post '/editprofile/photo', user.auth, user.editProfilePhoto
 
         else
           console.log error

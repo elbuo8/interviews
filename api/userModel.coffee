@@ -8,9 +8,10 @@ class userModel
     # 1. Check for duplicates in email or username
     # 2. Error messages with feedback
     req.body.password = crypto.createHash('sha1').update(req.body.password).digest('hex')
+    #req.body['new'] = true Add this later
     @users.insert req.body, (error, result) -> #result viene en forma de array
       req.session._id = result[0]._id
-      res.redirect '/editprofile'
+      res.redirect '/createprofile'
 
   login: (req, res) =>
     # 1. Feedback for wrong information
@@ -21,7 +22,7 @@ class userModel
       req.body.password = crypto.createHash('sha1').update(req.body.password).digest('hex')
       if(req.body.password is user.password)
         req.session._id = user._id
-        res.redirect '/profile'
+        res.redirect '/createprofile' #modify later
       else
         res.redirect '/login'
 
@@ -29,9 +30,16 @@ class userModel
     delete req.session._id
     res.redirect '/'
 
-  editProfileView: (req, res) =>
+  createProfileView: (req, res) =>
     @users.findOne {_id: new ObjectID req.session._id}, {password: 0}, (error, user) ->
-      res.render 'editProfileView', {user: user}
+      res.render 'createProfileView'
+
+  createProfile: (req, res) =>
+    #save lo q venga
+
+  editProfilePhoto: (req, res) =>
+    #post a aws
+    #save link en mongo
 
 
   getProfile: (req, res) =>
