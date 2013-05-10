@@ -53,9 +53,7 @@ block content
         document.getElementById('save').onclick = (e) ->
             hours = {}
             for index in [0..Math.floor ($('#hours').children().size()-2)/2]
-                console.log index
                 dayId = $('#dayId' + index).val()
-                console.log dayId
                 if _.has hours, dayId
                     hours[dayId].push $('#hourId' + index).val()
                 else
