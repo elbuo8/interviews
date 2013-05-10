@@ -30,11 +30,8 @@ class userModel
     delete req.session._id
     res.redirect '/'
 
-  createProfileView: (req, res) =>
-    @users.findOne {_id: new ObjectID req.session._id}, {password: 0}, (error, user) ->
-      res.render 'createProfileView'
-
   createProfile: (req, res) =>
+    console.log req
     #save lo q venga
 
   editProfilePhoto: (req, res) =>
