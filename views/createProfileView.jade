@@ -5,25 +5,17 @@ block content
 
     div.container
       div.fluid-row
-      
+
         div#photo
             //thumbnail de esto es del user.
             form(action='/editprofile/photo', class='dropzone', id='profilePic')
             p Drop your profile here if you want to update it!
 
-        div#skills
-            p Write your skills separated by commas
-            textarea#skillList
+        div#hours
+            input#addHour(type='button', value='Add date')
 
         div#save
             input(type='button', value='Save')
-
-    div#hours
-        input#addHour(type='button', value='Add date')
-
-
-    div#save
-        input(type='button', value='Save')
 
 
     :coffeescript
