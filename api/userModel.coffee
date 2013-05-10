@@ -2,7 +2,7 @@ crypto = require 'crypto'
 ObjectID = (require 'mongodb').ObjectID
 
 class userModel
-  constructor: (@users, @tags) ->
+  constructor: (@users) ->
 
   registration: (req, res) =>
     # 1. Check for duplicates in email or username
@@ -29,10 +29,6 @@ class userModel
   logout: (req, res) =>
     delete req.session._id
     res.redirect '/'
-
-  createProfileView: (req, res) =>
-    @tags.find({}).toArray(error, tags) ->
-      res.render 'createProfileView', {tags:tags}
 
   createProfile: (req, res) =>
     console.log req
