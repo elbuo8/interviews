@@ -22,7 +22,8 @@ html
           ul
             li
               h1
-                img.image-logo(src='images/logo-pitch.png')
+                a(href='http://localhost:5000', title='Home Page')
+                  img.image-logo(src='images/logo-pitch.png')
             if typeof(user) == 'undefined'
               li.navigation-links
                 a(href='/registration', title='Create an Account') Sign Up
