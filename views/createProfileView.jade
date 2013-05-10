@@ -29,6 +29,8 @@ block content
             skillList[skill] = 5 for skill in skills
             json['skills'] = skillList
 
+
+
             $.post '/createprofile', (res) ->
                 console.log res
 
