@@ -27,6 +27,7 @@
 	-webkit-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.35);
 	-moz-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.35);
 	-o-box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.35);
+	height:67px;
 }
 
 #header ul {
@@ -41,25 +42,25 @@
 }
 
 #header h1 {
-	height: 90px;
+	height: 67px;
 }
 
 h1 .image-logo {
-	width:400px;
-	padding:20px 0;
+	width:150px;
+	padding:12px 0;
 }
 
 #header ul .navigation-links {
 	float: right;
-	height: 90px;
+	height: 67px;
 }
 
 .navigation-links a {
 	cursor: pointer;
 	text-decoration: none;
-	line-height: 90px;
+	line-height: 67px;
 	color: white;
-	font-size: 1em;
+	font-size: 1.1em;
 	font-weight: normal;
 	padding: 0 25px;
 	font-family: "Proxima Nova";
