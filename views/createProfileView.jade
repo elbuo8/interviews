@@ -12,6 +12,7 @@ block content
         textarea#skillList
 
     div#hours
+        input#addHour(type='button', value='Add date')
 
 
     div#save
@@ -19,23 +20,34 @@ block content
 
 
     :coffeescript
+
+        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        hours = ['12:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00']
         Dropzone.options.profilePic =
             init: ->
                 this.on 'success', (file, data) ->
                     console.log data
                 #adjust el box para que sea el que se guardo
-        #document.getElementById('save').onclick = (e) ->
-        #    json = {}
-        #
-        #    skills = document.getElementById('skillList').value.toLowerCase().split(',')
-        #    skillList = {}
-        #    skillList[skill] = 5 for skill in skills
-        #    json['skills'] = skillList
-        #
-        #
-        #
-        #    $.post '/createprofile', (res) ->
-        #        console.log res
+
+        document.getElementById('addHour').onclick = (e) ->
+            newSelect = document.createElement 'select'
+            for day in days
+                option = new Option()
+                option.text = option.value = day
+                newSelect.options.add option
+            $('#hours').append newSelect
+
+            newSelect = document.createElement 'select'
+            for hour in hours
+                option = new Option()
+                option.text = option.value = hour + ' AM'
+                newSelect.options.add option
+            for hour in hours
+                option = new Option()
+                option.text = option.value = hour + ' PM'
+                newSelect.options.add option
+            $('#hours').append newSelect
+
 
 
 
