@@ -11,6 +11,9 @@ block content
         p Write your skills separated by commas
         textarea#skillList
 
+    div#hours
+
+
     div#save
         input(type='button', value='Save')
 
@@ -21,18 +24,18 @@ block content
                 this.on 'success', (file, data) ->
                     console.log data
                 #adjust el box para que sea el que se guardo
-        document.getElementById('save').onclick = (e) ->
-            json = {}
-
-            skills = document.getElementById('skillList').value.toLowerCase().split(',')
-            skillList = {}
-            skillList[skill] = 5 for skill in skills
-            json['skills'] = skillList
-
-
-
-            $.post '/createprofile', (res) ->
-                console.log res
+        #document.getElementById('save').onclick = (e) ->
+        #    json = {}
+        #
+        #    skills = document.getElementById('skillList').value.toLowerCase().split(',')
+        #    skillList = {}
+        #    skillList[skill] = 5 for skill in skills
+        #    json['skills'] = skillList
+        #
+        #
+        #
+        #    $.post '/createprofile', (res) ->
+        #        console.log res
 
 
 
