@@ -74,7 +74,54 @@ h1 .image-logo {
 	background-size: 1759px 687px;
 	position: relative;
 	z-index: -99;
-	padding-top: 90px;
+	padding-top: 67px;
+}
+
+.box {
+	height: 630px;
+	width: 500px;
+	padding: 30px;
+	float: right;
+	background: rgba(0,0,0,0.5);
+
+}
+
+.box h2 {
+	font-size: 1.8em;
+	line-height: 1.8em;
+	color: #fff;
+	text-align: center;
+	padding: 0 0 7% 0;
+}
+
+.box form {
+	font-size: 9px;
+	width: 100%;
+	max-width: 600px;
+	margin: 0 auto;
+	background: #fff;
+	border: solid 3px #CFD7DB;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	overflow: hidden;
+	position: relative;
+}
+
+.box .form-steps {
+	padding: 3% 6%;
+}
+
+.form-steps {
+	padding: 4% 6%;
+	border-bottom: solid 1px #fff;
+	background: #ffffff;
+	background: -moz-linear-gradient(top, #fff 8%, #ebeef2 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(8%, #fff), color-stop(100%, #ebeef2));
+	background: -webkit-linear-gradient(top, #fff 8%, #ebeef2 100%);
+	background: -o-linear-gradient(top, #fff 8%, #ebeef2 100%);
+	background: -ms-linear-gradient(top, #fff 8%, #ebeef2 100%);
+	background: linear-gradient(to bottom, #fff 8%, #ebeef2 100%);
 }
 
 .headline {
@@ -156,6 +203,10 @@ h1 .image-logo {
 
 .btn-login {
 	padding: 13px 130px;
+}
+
+#photo form {
+	margin: 0;
 }
 
 

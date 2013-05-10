@@ -2,17 +2,21 @@ include layout
 block content
     script(src='js/dropzone.js')
     script(src='/components/jquery/jquery.min.js')
-    div#photo
-        //thumbnail de esto es del user.
-        form(action='/editprofile/photo', class='dropzone', id='profilePic')
-        p Drop your profile here if you want to update it!
 
-    div#skills
-        p Write your skills separated by commas
-        textarea#skillList
+    div.container
+      div.fluid-row
+      
+        div#photo
+            //thumbnail de esto es del user.
+            form(action='/editprofile/photo', class='dropzone', id='profilePic')
+            p Drop your profile here if you want to update it!
 
-    div#save
-        input(type='button', value='Save')
+        div#skills
+            p Write your skills separated by commas
+            textarea#skillList
+
+        div#save
+            input(type='button', value='Save')
 
 
     :coffeescript
