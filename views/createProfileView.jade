@@ -1,7 +1,6 @@
 include layout
 block content
     script(src='js/dropzone.js')
-    script(src='/components/jquery/jquery.min.js')
 
     div.container
       div.fluid-row
@@ -17,11 +16,13 @@ block content
         div#save
             input(type='button', value='Save')
 
-
+    script(src='/components/jquery/jquery.min.js')
+    script(src='/js/underscore.js')
     :coffeescript
 
         days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-        hours = ['12:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00']
+        hours = ['1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00']
+
         Dropzone.options.profilePic =
             init: ->
                 this.on 'success', (file, data) ->
@@ -30,6 +31,7 @@ block content
 
         document.getElementById('addHour').onclick = (e) ->
             newSelect = document.createElement 'select'
+            $(newSelect).attr 'id', 'dayId'.concat ($('#hours').children().size() - 1)/2
             for day in days
                 option = new Option()
                 option.text = option.value = day
@@ -37,6 +39,7 @@ block content
             $('#hours').append newSelect
 
             newSelect = document.createElement 'select'
+            $(newSelect).attr 'id', 'hourId'.concat ($('#hours').children().size() - 2)/2
             for hour in hours
                 option = new Option()
                 option.text = option.value = hour + ' AM'
@@ -46,6 +49,18 @@ block content
                 option.text = option.value = hour + ' PM'
                 newSelect.options.add option
             $('#hours').append newSelect
+
+        document.getElementById('save').onclick = (e) ->
+            hours = {}
+            for index in [0..Math.floor ($('#hours').children().size()-2)/2]
+                console.log index
+                dayId = $('#dayId' + index).val()
+                console.log dayId
+                if _.has hours, dayId
+                    hours[dayId].push $('#hourId' + index).val()
+                else
+                    hours[dayId] = [$('#hourId' + index).val()]
+            console.log hours
 
 
 
