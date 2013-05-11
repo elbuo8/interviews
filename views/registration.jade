@@ -1,17 +1,24 @@
-include layout
-  block content
-    div.container
-      div.sign-in
-        h2#login-title Create your account
-        form(action='/registration', method='post')
-          div
-            input(type='text', name = 'username', placeholder = 'username')
-          div
-            input(type='email', name = 'email', placeholder = 'email')
-          div
-            select
-              option University of Puerto Rico - Mayaguez Campus 
-          div
-            input(type='password', name = 'password', placeholder = 'password')
-          div
-            button.btn-blue.btn-register(type='submit') Register
+form(action='/registration', method='post')
+  div.form-steps
+    ul
+      li.info
+        a(href="/info", title='Step 1') 1
+        span User
+      li.skills
+        a(href='/skills', title='Step 2') 2
+        span Skills
+  div.form-section#first-step
+    header 
+      label User Info
+    ul.cf.form-list
+      li
+        input(type='text', name = 'username', placeholder = 'username')
+      li
+        input(type='email', name = 'email', placeholder = 'email')
+      li
+        select
+          option UPR - Mayaguez Campus 
+      li
+        input(type='password', name = 'password', placeholder = 'password')
+      li
+        button.btn-blue.btn-register(type='submit') Register
