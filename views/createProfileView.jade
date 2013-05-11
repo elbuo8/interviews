@@ -89,7 +89,8 @@ block content
             ).get()
             json['hours'] = hours
             json['skills'] = tags
-            $.post '/createprofile', (res) ->
-                console.log res
+            $.post '/createprofile', json, (res) ->
+                #lol
+
 
 

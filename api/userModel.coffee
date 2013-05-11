@@ -32,7 +32,9 @@ class userModel
     res.redirect '/'
 
   createProfile: (req, res) =>
-    #@users.update
+    @users.update {_id: new ObjectID req.session._id}, {$set: {hours:req.body.hours, skills:req.body.skills}}, (error, result) ->
+      console.log result
+      res.redirect '/'
 
   editProfilePhoto: (req, res) =>
     #post a aws
