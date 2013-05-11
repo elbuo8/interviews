@@ -71,11 +71,25 @@ block content
             $('#hours').append newSelect
 
         document.getElementById('save').onclick = (e) ->
+            json = {}
             hours = {}
-            for index in [0..Math.floor ($('#hours').children().size()-2)/2]
-                dayId = $('#dayId' + index).val()
-                if _.has hours, dayId
-                    hours[dayId].push $('#hourId' + index).val()
-                    hours[dayId] = _.uniq hours[dayId]
-                else
-                    hours[dayId] = [$('#hourId' + index).val()]
+            totalHours = Math.floor ($('#hours').children().size()-2)/2
+            if totalHours >= 0
+                for index in [0..totalHours]
+                    dayId = $('#dayId' + index).val()
+                    if _.has hours, dayId
+                        hours[dayId].push $('#hourId' + index).val()
+                        hours[dayId] = _.uniq hours[dayId]
+                    else
+                        hours[dayId] = [$('#hourId' + index).val()]
+                if 'undefined' in hours then delete hours['undefined']
+            tags = $('.tagit-label').map(->
+                skill = $(this).text()
+                JSON.parse('{\"' + skill + '\": 5}')
+            ).get()
+            json['hours'] = hours
+            json['skills'] = tags
+            $.post '/createprofile', (res) ->
+                console.log res
+
+

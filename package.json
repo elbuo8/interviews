@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "Skedit",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,6 +10,8 @@
     "jade": "*",
     "coffee-script": "~1.6.1",
     "mongodb": "*",
-    "coffee-trace": "*"
+    "coffee-trace": "*",
+    "gravatar": "~1.0.6",
+    "bitly2": "0.0.3"
   }
 }
