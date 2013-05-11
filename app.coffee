@@ -43,7 +43,7 @@ app.configure () ->
             app.get '/profile', user.auth, user.getProfile
             app.get '/createprofile', user.auth, (req, res) ->
               db.collection 'tags', (error, collection) ->
-                collection.find().toArray (error, tags) ->
+                collection.distinct 'tag', (error, tags) ->
                   res.render 'createProfileView', {tags : tags}
             app.get '/createprofile', user.auth, user.createProfile
             app.post '/editprofile/photo', user.auth, user.editProfilePhoto
