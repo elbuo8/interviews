@@ -145,12 +145,37 @@ h1 .image-logo {
 	position: relative;
 }
 
+.form-steps ul li:first-child:before  {
+	content: " ";
+	display: block;
+	height: 6px;
+	width: 141%;
+	background: #82899e;
+	position: absolute;
+	top: 26px;
+	left: 56px;
+	z-index: 1;
+}
+
+.form-steps ul li:before  {
+	content: " ";
+	display: block;
+	height: 6px;
+	width: 141%;
+	background: #82899e;
+	position: absolute;
+	top: 26px;
+	left: -79px;
+	z-index: 1;
+}
+
 .form-steps ul li a {
 	width: 40px;
 	height: 40px;
 	line-height: 30px;
 	margin-bottom: 9px;
 	font-size: 1.3em;
+	text-decoration: none;
 }
 
 .form-steps ul li span {
