@@ -40,7 +40,6 @@ script(src='/js/tagit.js')
             if url.status == 200
                 $('#avatar').attr 'src', url.url
     }
-    Dropzone.options.
 
     tags = $('#tagList').text().slice(0, -1).split(',')
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -50,13 +49,6 @@ script(src='/js/tagit.js')
         fieldName: 'skill',
         availableTags: tags,
         allowSpaces: true,
-
-
-    Dropzone.options.profilePic =
-        init: ->
-            this.on 'success', (file, data) ->
-                console.log data
-            #adjust el box para que sea el que se guardo
 
     document.getElementById('addHour').onclick = (e) ->
         newSelect = document.createElement 'select'
@@ -99,7 +91,10 @@ script(src='/js/tagit.js')
         json['hours'] = hours
         json['skills'] = tags
         $.post '/createprofile', json, (res) ->
-            #lol
+            if res.status == 200
+                window.location.href = '/profile'
+            else
+                alert 'try again'
 
 
 

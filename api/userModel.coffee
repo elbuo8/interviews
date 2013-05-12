@@ -41,8 +41,10 @@ class userModel
 
   createProfile: (req, res) =>
     @users.update {_id: new ObjectID req.session._id}, {$set: {hours:req.body.hours, skills:req.body.skills}}, (error, result) ->
-      console.log result
-      res.redirect '/'
+      if result
+        res.send {status: 200}
+      else
+        res.send {status: result}
 
   getPhoto: (req, res) =>
     @users.findOne {_id: new ObjectID req.session._id}, {photo:1}, (error, user) ->
@@ -72,7 +74,7 @@ class userModel
   getProfile: (req, res) =>
     @users.findOne {_id: new ObjectID req.session._id}, (error, user) ->
       #console.log user, req.session._id
-      res.render 'ProfileView', {user: req.session._id, profile: user}
+      res.render 'ProfileView', {user: user}
 
   auth: (req, res, next) =>
     if req.session._id then next() else res.redirect '/'
