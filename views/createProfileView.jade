@@ -1,5 +1,4 @@
 
-
 script(src='js/dropzone.js')
 link(rel='stylesheet', href='stylesheets/jquery-ui.css')
 link(rel='stylesheet', href='stylesheets/jquery.tagit.css')
@@ -9,6 +8,7 @@ div.container
 
     div#photo
         //thumbnail de esto es del user.
+        img#avatar(src='/images/ajax-loader.gif')
         form(action='/editprofile/photo', class='dropzone', id='profilePic')
         p Drop your profile here if you want to update it!
 
@@ -26,10 +26,13 @@ div.container
             | #{tag},
 
 
+
 script(src='/js/jquery-ui.js')
 script(src='/js/underscore.js')
 script(src='/js/tagit.js')
 :coffeescript
+    $.get '/user/photo', (url) ->
+        $('#avatar').attr 'src', url
 
     tags = $('#tagList').text().slice(0, -1).split(',')
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']

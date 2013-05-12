@@ -37,6 +37,10 @@ class userModel
       console.log result
       res.redirect '/'
 
+  getPhoto: (req, res) =>
+    @users.findOne {_id: new ObjectID req.session._id}, {photo:1}, (error, user) ->
+      res.send user.photo
+
   editProfilePhoto: (req, res) =>
     #post a aws
     #save link en mongo
