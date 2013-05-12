@@ -1,14 +1,20 @@
 extends layout
 block content
     div
-
-        div#header
+        div
             p Hello #{user.username}
 
         div#photo
             img(src='#{user.photo}')
 
         div#skills
-            for skill in user.skills
-                for key in skill
-                    p #{key} - #{skill[key]}
+            if user.skills
+                for object in user.skills
+                    for points, skill in object
+                        p #{skill} - #{points}
+        div#hours
+            if user.hours
+                for hour, day in user.hours
+                    p #{day}
+                    for time in hour
+                        p #{time}

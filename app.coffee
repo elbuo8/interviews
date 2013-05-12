@@ -39,7 +39,8 @@ app.configure () ->
             app.get "/login", (req, res) -> res.render('login')
             app.post "/login", user.login
             app.get '/logout', user.logout
-            app.get '/', (req, res) -> res.render('index', {user: req.session._id})
+            app.get '/', (req, res) ->
+              if req.session._id then res.redirect '/profile' else res.render('index', {user: req.session._id})
             app.get '/profile', user.auth, user.getProfile
             app.get '/createprofile', user.auth, (req, res) ->
               db.collection 'tags', (error, collection) ->

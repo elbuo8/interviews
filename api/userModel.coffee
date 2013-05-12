@@ -32,7 +32,6 @@ class userModel
         req.session._id = user._id
         res.json {status: 200}
 
-
   logout: (req, res) =>
     delete req.session._id
     res.redirect '/'
