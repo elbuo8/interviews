@@ -1,4 +1,14 @@
 extends layout
 block content
+    div
 
-    p Hello
+        div#header
+            p Hello #{user.username}
+
+        div#photo
+            img(src='#{user.photo}')
+
+        div#skills
+            for skill in user.skills
+                for key in skill
+                    p #{key} - #{skill[key]}

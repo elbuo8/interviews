@@ -25,15 +25,13 @@ class userModel
         res.send 'Existing username or email'
 
   login: (req, res) =>
-    @users.findOne {username: req.body.username}, {password:1}, (error, user) ->
-      if user is null
-        res.redirect '/login'
-      req.body.password = crypto.createHash('sha1').update(req.body.password).digest('hex')
-      if(req.body.password is user.password)
-        req.session._id = user._id
-        res.redirect '/createprofile' #modify later
+    @users.findOne {username: req.body.username, password: crypto.createHash('sha1').update(req.body.password).digest('hex')}, {password:1}, (error, user) ->
+      if user == null
+        res.json {status: 404, error: 'Incorrect combination of unsername & password'}
       else
-        res.send 'Incorrect combination of unsername & password'
+        req.session._id = user._id
+        res.json {status: 200}
+
 
   logout: (req, res) =>
     delete req.session._id
@@ -74,7 +72,8 @@ class userModel
   getProfile: (req, res) =>
     @users.findOne {_id: new ObjectID req.session._id}, (error, user) ->
       #console.log user, req.session._id
-      res.render 'ProfileView', {user: user}
+      owner = if (req.session._id == user._id) then true else false
+      res.render 'ProfileView', {owner: owner, user: user}
 
   auth: (req, res, next) =>
     if req.session._id then next() else res.redirect '/'

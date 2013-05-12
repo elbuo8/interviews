@@ -1,12 +1,27 @@
-include layout
-  block content
-    div.container
-      div.sign-in
-        h2#login-title Login
-        form(action='/login', method='post')
-          div
-            input(type='text', name = 'username', placeholder='username')
-          div
-            input(type='password', name = 'password', placeholder='password')
-          div
-            button.btn-blue.btn-login(type='submit') Login
+extends layout
+block content
+  script(src='/js/parsley.min.js')
+  script(src='/components/jquery/jquery.min.js')
+  div.container
+    div.sign-in
+      h2#login-title Login
+      form#loginForm(data-validate='parsley')
+        div
+          input#username(type='text', name = 'username', placeholder='username', data-required='true')
+        div
+          input#password(type='password', name = 'password', placeholder='password', data-required='true', data-minlength='6')
+        div
+          button.btn-blue.btn-login(type='submit') Login
+
+  :coffeescript
+    $('#loginForm').submit (e) ->
+      e.preventDefault()
+      json =
+        username: $('#username').val(),
+        password: $('#password').val()
+
+      $.post '/login', json, (res) ->
+        if res.status == 200
+          window.location.href = '/profile'
+        else
+          alert res.error
