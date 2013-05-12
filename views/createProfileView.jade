@@ -1,96 +1,94 @@
-include layout
-block content
-    script(src='js/dropzone.js')
-    link(rel='stylesheet', href='stylesheets/jquery-ui.css')
-    link(rel='stylesheet', href='stylesheets/jquery.tagit.css')
-
-    div.container
-      div.fluid-row
-
-        div#photo
-            //thumbnail de esto es del user.
-            form(action='/editprofile/photo', class='dropzone', id='profilePic')
-            p Drop your profile here if you want to update it!
-
-        div#skills
-            input#tags(type='text')
-
-        div#hours
-            input#addHour(type='button', value='Add date')
-
-        div#save
-            input(type='button', value='Save')
-
-        p#tagList('hidden')
-            for tag in tags
-                | #{tag},
 
 
+script(src='js/dropzone.js')
+link(rel='stylesheet', href='stylesheets/jquery-ui.css')
+link(rel='stylesheet', href='stylesheets/jquery.tagit.css')
 
-    script(src='/components/jquery/jquery.min.js')
-    script(src='/js/jquery-ui.js')
-    script(src='/js/underscore.js')
-    script(src='/js/tagit.js')
-    :coffeescript
+div.container
+  div.fluid-row
 
-        tags = $('#tagList').text().slice(0, -1).split(',')
-        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-        hours = ['1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00']
+    div#photo
+        //thumbnail de esto es del user.
+        form(action='/editprofile/photo', class='dropzone', id='profilePic')
+        p Drop your profile here if you want to update it!
 
-        $('#tags').tagit
-            fieldName: 'skill',
-            availableTags: tags,
-            allowSpaces: true,
+    div#skills
+        input#tags(type='text')
+
+    div#hours
+        input#addHour(type='button', value='Add date')
+
+    div#save
+        input(type='button', value='Save')
+
+    p#tagList('hidden')
+        for tag in tags
+            | #{tag},
 
 
-        Dropzone.options.profilePic =
-            init: ->
-                this.on 'success', (file, data) ->
-                    console.log data
-                #adjust el box para que sea el que se guardo
+script(src='/js/jquery-ui.js')
+script(src='/js/underscore.js')
+script(src='/js/tagit.js')
+:coffeescript
 
-        document.getElementById('addHour').onclick = (e) ->
-            newSelect = document.createElement 'select'
-            $(newSelect).attr 'id', 'dayId'.concat ($('#hours').children().size() - 1)/2
-            for day in days
-                option = new Option()
-                option.text = option.value = day
-                newSelect.options.add option
-            $('#hours').append newSelect
+    tags = $('#tagList').text().slice(0, -1).split(',')
+    days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+    hours = ['1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00']
 
-            newSelect = document.createElement 'select'
-            $(newSelect).attr 'id', 'hourId'.concat ($('#hours').children().size() - 2)/2
-            for hour in hours
-                option = new Option()
-                option.text = option.value = hour + ' AM'
-                newSelect.options.add option
-            for hour in hours
-                option = new Option()
-                option.text = option.value = hour + ' PM'
-                newSelect.options.add option
-            $('#hours').append newSelect
+    $('#tags').tagit
+        fieldName: 'skill',
+        availableTags: tags,
+        allowSpaces: true,
 
-        document.getElementById('save').onclick = (e) ->
-            json = {}
-            hours = {}
-            totalHours = Math.floor ($('#hours').children().size()-2)/2
-            if totalHours >= 0
-                for index in [0..totalHours]
-                    dayId = $('#dayId' + index).val()
-                    if _.has hours, dayId
-                        hours[dayId].push $('#hourId' + index).val()
-                        hours[dayId] = _.uniq hours[dayId]
-                    else
-                        hours[dayId] = [$('#hourId' + index).val()]
-                if 'undefined' in hours then delete hours['undefined']
-            tags = $('.tagit-label').map(->
-                skill = $(this).text()
-                JSON.parse('{\"' + skill + '\": 5}')
-            ).get()
-            json['hours'] = hours
-            json['skills'] = tags
-            $.post '/createprofile', json, (res) ->
-                #lol
+
+    Dropzone.options.profilePic =
+        init: ->
+            this.on 'success', (file, data) ->
+                console.log data
+            #adjust el box para que sea el que se guardo
+
+    document.getElementById('addHour').onclick = (e) ->
+        newSelect = document.createElement 'select'
+        $(newSelect).attr 'id', 'dayId'.concat ($('#hours').children().size() - 1)/2
+        for day in days
+            option = new Option()
+            option.text = option.value = day
+            newSelect.options.add option
+        $('#hours').append newSelect
+
+        newSelect = document.createElement 'select'
+        $(newSelect).attr 'id', 'hourId'.concat ($('#hours').children().size() - 2)/2
+        for hour in hours
+            option = new Option()
+            option.text = option.value = hour + ' AM'
+            newSelect.options.add option
+        for hour in hours
+            option = new Option()
+            option.text = option.value = hour + ' PM'
+            newSelect.options.add option
+        $('#hours').append newSelect
+
+    document.getElementById('save').onclick = (e) ->
+        json = {}
+        hours = {}
+        totalHours = Math.floor ($('#hours').children().size()-2)/2
+        if totalHours >= 0
+            for index in [0..totalHours]
+                dayId = $('#dayId' + index).val()
+                if _.has hours, dayId
+                    hours[dayId].push $('#hourId' + index).val()
+                    hours[dayId] = _.uniq hours[dayId]
+                else
+                    hours[dayId] = [$('#hourId' + index).val()]
+            if 'undefined' in hours then delete hours['undefined']
+        tags = $('.tagit-label').map(->
+            skill = $(this).text()
+            JSON.parse('{\"' + skill + '\": 5}')
+        ).get()
+        json['hours'] = hours
+        json['skills'] = tags
+        $.post '/createprofile', json, (res) ->
+            #lol
 
 
 
