@@ -48,7 +48,7 @@ app.configure () ->
             app.get '/createprofile', user.auth, user.createProfile
             app.post '/createprofile', user.auth, user.createProfile
             app.get '/user/photo', user.auth, user.getPhoto
-            #app.post '/user/photo', user.auth, user.setPhoto
+            app.post '/user/photo', user.auth, user.setPhoto
         else
           console.log error
 

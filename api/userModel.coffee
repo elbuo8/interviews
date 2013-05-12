@@ -1,6 +1,13 @@
 crypto = require 'crypto'
 ObjectID = (require 'mongodb').ObjectID
 gravatar = require 'gravatar'
+fs = require 'fs'
+amazonS3 = require 'awssum-amazon-s3'
+s3 = new amazonS3.S3 {
+  accessKeyId: process.env.aws_key,
+  secretAccessKey: process.env.aws_secret,
+  region: amazonS3.US_EAST_1
+}
 
 class userModel
   constructor: (@users) ->
@@ -40,6 +47,26 @@ class userModel
   getPhoto: (req, res) =>
     @users.findOne {_id: new ObjectID req.session._id}, {photo:1}, (error, user) ->
       res.send user.photo
+
+  setPhoto: (req, res) =>
+    console.log req.files
+    fs.stat req.files.file.path, (error, fileInfo) =>
+      stream = fs.createReadStream req.files.file.path
+      options =
+        BucketName: 'skedit',
+        ObjectName: req.session._id,
+        ContentLength: fileInfo.size,
+        Acl: 'public-read'
+        Body: stream
+
+      s3.PutObject options, (error, data) =>
+        if data.StatusCode == 200
+          url = 'https://s3.amazonaws.com/skedit/' + req.session._id
+          res.send {status: 200, url: url}
+          @users.update {_id: new ObjectID req.session._id}, {$set:{photo: url}}, (error, result) ->
+        else
+          res.send {status: data.StatusCode}
+
 
 
   getProfile: (req, res) =>

@@ -12,6 +12,9 @@
     "mongodb": "*",
     "coffee-trace": "*",
     "gravatar": "~1.0.6",
-    "bitly2": "0.0.3"
+    "bitly2": "0.0.3",
+    "awssum": "~1.0.0-beta",
+    "awssum-amazon": "~1.0.2",
+    "awssum-amazon-s3": "~1.2.4"
   }
 }

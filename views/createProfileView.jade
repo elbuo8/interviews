@@ -37,7 +37,8 @@ script(src='/js/tagit.js')
     $('#avatar').dropzone {url: '/user/photo',
     init: ->
         this.on 'success', (file, url) ->
-            $('#avatar').attr 'src', url
+            if url.status == 200
+                $('#avatar').attr 'src', url.url
     }
     Dropzone.options.
 
