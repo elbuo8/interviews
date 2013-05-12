@@ -46,9 +46,9 @@ app.configure () ->
                 collection.distinct 'tag', (error, tags) ->
                   res.render 'createProfileView', {tags : tags}
             app.get '/createprofile', user.auth, user.createProfile
-            app.post '/editprofile/photo', user.auth, user.editProfilePhoto
             app.post '/createprofile', user.auth, user.createProfile
             app.get '/user/photo', user.auth, user.getPhoto
+            #app.post '/user/photo', user.auth, user.setPhoto
         else
           console.log error
 

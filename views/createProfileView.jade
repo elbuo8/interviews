@@ -29,11 +29,17 @@ script(src='/js/jquery-ui.js')
 script(src='/js/underscore.js')
 script(src='/js/tagit.js')
 :coffeescript
-
-    $('#avatar').dropzone {url: '/user/photo'}
-
-    $.get '/user/photo', (url) ->
+    getImage = $.get '/user/photo', (url) ->
         $('#avatar').attr 'src', url
+
+    getImage
+
+    $('#avatar').dropzone {url: '/user/photo',
+    init: ->
+        this.on 'success', (file, url) ->
+            $('#avatar').attr 'src', url
+    }
+    Dropzone.options.
 
     tags = $('#tagList').text().slice(0, -1).split(',')
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
