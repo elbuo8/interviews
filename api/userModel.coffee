@@ -6,13 +6,14 @@ class userModel
   constructor: (@users) ->
 
   registration: (req, res) =>
-    @users.findOne {$or:[email:req.body.email, username:req.body.username]}, (error, result) ->
+    console.log req.body
+    @users.findOne {$or:[email:req.body.email, username:req.body.username]}, (error, result) =>
       if !result
         req.body.password = crypto.createHash('sha1').update(req.body.password).digest('hex')
         req.body.photo = gravatar.url(req.body.email, {s: '200'})
         @users.insert req.body, (error, result) -> #result viene en forma de array
           req.session._id = result[0]._id
-          res.redirect '/createprofile'
+          res.send '200'
       else
         res.send 'Existing username or email'
 

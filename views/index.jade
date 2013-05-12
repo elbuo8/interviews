@@ -1,25 +1,49 @@
 extends layout
 
 block content
+  script(src='/components/jquery/jquery.min.js')
+  script(src='/js/parsley.min.js')
   section
     div.main-image
       div.container
         div.row-fluid
           div.box
             h2 Tell us about your skills, we'll match you with a mentor.
-            include registration
-                  
+            div.form-steps
+              ul
+                li.info
+                  a(href="/info", title='Step 1') 1
+                  span User
+                li.skills
+                  a(href='/skills', title='Step 2') 2
+                  span Skills
+            div#currentStep
+              include registration
 
-                      
+
+
+
   section
     div.headline
       div.container
         div.row-fluid
           div.inside
-            h2 Privately received personally curated mentorshisp, for technical interviews.  
+            h2 Privately received personally curated mentorshisp, for technical interviews.
+
+  :coffeescript
+    $('#registration').submit (e) ->
+      e.preventDefault()
+      json =
+        usename: $('#username').val(),
+        email: $('#email').val(),
+        password: $('#password').val()
+
+      $.post '/registration', json, (data) ->
+        if data == '200'
+          $.get '/createprofile', (html) ->
+            $('#currentStep').html html
+        else
+          alert data
 
 
 
-
-
-  

@@ -1,24 +1,17 @@
-form(action='/registration', method='post')
-  div.form-steps
-    ul
-      li.info
-        a(href="/info", title='Step 1') 1
-        span User
-      li.skills
-        a(href='/skills', title='Step 2') 2
-        span Skills
+form(id='registration', data-validate='parsley')
   div.form-section#first-step
     header 
       label Your Account
+    header
+      label User Info
     ul.cf.form-list
       li
-        input(type='text', name = 'username', placeholder = 'username')
+        input(id='username', type='text', name = 'username', placeholder = 'username', data-required='true')
       li
-        input(type='email', name = 'email', placeholder = 'email')
+        input(id='email', type='email', name = 'email', placeholder = 'email', data-required='true', data-type='email')
       li
         select
-          option UPR - Mayaguez Campus 
+          option UPR - Mayaguez Campus
       li
-        input(type='password', name = 'password', placeholder = 'password')
-      li
+        input(id='password', type='password', name = 'password', placeholder = 'password', data-required='true', data-minlength='6')
         button.btn-blue.btn-register(type='submit') Register
