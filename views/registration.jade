@@ -1,10 +1,6 @@
 form(id='registration', data-validate='parsley')
   div.form-section#first-step
-    header 
-      label Your Account
-    header
-      label User Info
-    ul.cf.form-list
+    ul.form-list
       li
         input(id='username', type='text', name = 'username', placeholder = 'username', data-required='true')
       li
@@ -14,4 +10,4 @@ form(id='registration', data-validate='parsley')
           option UPR - Mayaguez Campus
       li
         input(id='password', type='password', name = 'password', placeholder = 'password', data-required='true', data-minlength='6')
-        button.btn-blue.btn-register(type='submit') Register
+      button.btn-blue.btn-register(type='submit') Register

@@ -95,7 +95,7 @@ h1 .image-logo {
 	padding: 0 0 7% 0;
 }
 
-.box form {
+.box .form-wrapper {
 	font-size: 9px;
 	width: 100%;
 	max-width: 600px;
@@ -110,7 +110,7 @@ h1 .image-logo {
 }
 
 .box .form-steps {
-	padding: 3% 6% 0%;
+	padding: 3% 6% 2%;
 }
 
 .form-steps {
@@ -137,6 +137,16 @@ h1 .image-logo {
 	margin-left: 20%;
 }
 
+#currentStep {
+	float:left;
+	margin-top: 32px;
+}
+
+#currentStep form {
+	margin:0;
+	float:left;
+}
+
 .form-steps ul li {
 	font-size: 1.3em;
 	text-transform: uppercase;
@@ -145,7 +155,7 @@ h1 .image-logo {
 	position: relative;
 }
 
-.form-steps ul li:first-child:before  {
+.form-steps ul .info:before  {
 	content: " ";
 	display: block;
 	height: 6px;
@@ -157,7 +167,7 @@ h1 .image-logo {
 	z-index: 1;
 }
 
-.form-steps ul li:before  {
+.form-steps ul .skills:before  {
 	content: " ";
 	display: block;
 	height: 6px;
@@ -169,7 +179,7 @@ h1 .image-logo {
 	z-index: 1;
 }
 
-.form-steps ul li a {
+.form-steps ul li h3 {
 	width: 40px;
 	height: 40px;
 	line-height: 30px;
@@ -183,7 +193,7 @@ h1 .image-logo {
 	position:relative;
 }
 
-.form-steps ul li a {
+.form-steps ul li h3 {
 	position: relative;
 	z-index: 1000;
 	background: #fff;
@@ -206,29 +216,16 @@ h1 .image-logo {
 }
 
 .form-section {
-	padding: 0 6% 6% 6%;
+	padding: 0 0 6% 0;
 	border-bottom: #fff solid 1px;
 	-webkit-box-shadow: inset 0px -5px 6px -3px rgba(0,0,0,0.04);
 	box-shadow: inset 0px -5px 6px -3px rgba(0,0,0,0.04);
 	float:left;
 }
 
-.form-section header {
-	padding: 2em 0 1em 0;
-}
-
-.form-section header > label {
-	margin-bottom: 0.7em;
-	font-size: 1.5em;
-	color: #82899e;
-	text-transform: uppercase;
-	font-size: 1.5em;
-	display: block;
-	text-align: center;
-}
-
 .form-section ul {
 	margin:0;
+	float:left;
 }
 
 .form-list li {
@@ -267,10 +264,6 @@ h1 .image-logo {
 .form-list li > select {
 	width: 15em;
 	height: 3em;
-}
-
-input.error {
-	border:3px solid #e44a4a !important;
 }
 
 .headline {
@@ -337,7 +330,8 @@ input.error {
 }
 
 .btn-register {
-	padding: 13px 117px;
+	padding: 13px 168px;
+	margin:0 5%;
 }
 
 .btn-login {

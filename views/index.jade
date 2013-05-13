@@ -9,16 +9,17 @@ block content
         div.row-fluid
           div.box
             h2 Tell us about your skills, we'll match you with a mentor.
-            div.form-steps
-              ul
-                li.info
-                  a(href="/info", title='Step 1') 1
-                  span User
-                li.skills
-                  a(href='/skills', title='Step 2') 2
-                  span Skills
-            div#currentStep
-              include registration
+            div.form-wrapper
+              div.form-steps
+                ul
+                  li.info
+                    h3 1
+                    span Name
+                  li.skills
+                    h3 2
+                    span Skills
+                  div#currentStep
+                    include registration
 
   section
     div.headline
