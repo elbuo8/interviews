@@ -1,23 +1,24 @@
 link(rel='stylesheet', href='stylesheets/jquery-ui.css')
 link(rel='stylesheet', href='stylesheets/jquery.tagit.css')
 
-div.container
-  div.fluid-row
+div.wrapper-second-step
 
-    div#photo
-        //thumbnail de esto es del user.
-        img#avatar(src='/images/ajax-loader.gif')
-        form(action='/editprofile/photo', class='dropzone', id='profilePic')
-        p Drop your profile here if you want to update it!
+    ul
 
-    div#skills
-        input#tags(type='text')
+        li#photo
+            //thumbnail de esto es del user.
+            img#avatar(src='/images/ajax-loader.gif')
+            form(action='/editprofile/photo', class='dropzone', id='profilePic')
+            div Click on the image <br>to update your photo.
 
-    div#hours
-        input#addHour(type='button', value='Add date')
+        li#skills
+            input#tags(type='text')
 
-    div#save
-        input(type='button', value='Save')
+        li#hours
+            input#addHour(type='button', value='Add date')
+
+        li#save
+            input.btn-blue.btn-register(type='button', value='Register')
 
     p#tagList('hidden')
         for tag in tags

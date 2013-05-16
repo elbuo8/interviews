@@ -283,6 +283,60 @@ h1 .image-logo {
 	font-family: "Proxima Nova";
 }
 
+.gradient-divider-top {
+	background-image: url(../images/divider.png);
+	background-repeat: repeat-x;
+	height: 12px;
+	clear: both;
+}
+
+.skedit-box {
+	padding: 20px;
+	text-align: center;
+	height: 470px;
+	position: relative;
+}
+
+.skedit-box-image {
+	background-image: url(../images/receipt.png);
+	height: 462px;
+	width: 530px;
+	background-repeat: no-repeat;
+}
+
+.skedit-text-container-right {
+	position: absolute;
+	top: 85px;
+	right: 15px;
+	width: 480px;
+}
+
+.flt-right {
+	float:right;
+}
+
+.skedit-text-title {
+	font-size: 2em;
+	color: #333;
+	margin: 50px auto 20px auto;
+	font-weight: 400;
+	line-height: 1.5;
+}
+
+.clear-float {
+	clear: both;
+}
+
+.skedit-text-context {
+	text-align: center;
+	font-size: 18px;
+	color: #797979;
+	font-weight: 300;
+	line-height: 1.7;
+}
+
+
+
 /* CREATE ACCOUNT PAGE - LOGIN */
 
 .sign-in {
@@ -329,22 +383,95 @@ h1 .image-logo {
 	margin-top: 20px;
 }
 
-.btn-register {
-	padding: 13px 168px;
+.btn-next {
+	padding: 13px 175px;
 	margin:0 5%;
+	letter-spacing: 3px;
+	text-transform: uppercase;
 }
 
 .btn-login {
 	padding: 13px 130px;
 }
 
-#photo form {
+.wrapper-second-step {
+	font-size: 9px;
+	width: 100%;
+	max-width: 600px;
+	margin: 0 auto;
+	background: transparent;
+	overflow: hidden;
+	position: relative;
+}
+
+.wrapper-second-step #photo form {
 	margin: 0;
 }
 
+.wrapper-second-step #photo {
+	float:left;
+}
 
+.wrapper-second-step #photo img {
+	width:153px;
+	height:153px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	-o-border-radius: 2px;
+	border-radius: 2px;
+}
 
+.wrapper-second-step #photo div {
+	text-transform: none;
+	font-size: 10px;
+	margin: 13px 0;
+	text-align: center;
+}
 
+.wrapper-second-step #skills {
+	width:61%;
+	margin-left: 15px;
+}
 
+#skills ul {
+	margin:0;
+}
+
+#skills ul li {
+	padding: 0px 17px 4px 8px;
+	line-height: 20px;
+}
+
+#skills input[type="text"] {
+	margin: 0;
+	padding:1.5% 6%;
+	-moz-transition: all 0.2s ease-in 0s;
+	-webkit-transition: all 0.2s ease-in 0s;
+	transition: all 0.2s ease-in 0s;	
+	width:13em;
+	height:1.8em;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	-o-border-radius: 1px;
+	border-radius: 1px;
+}
+
+#skills span {
+	font-size: 13px;
+	text-transform: lowercase;
+	left: 0;
+}
+
+.wrapper-second-step #save {
+	float: left;
+	width: 100%;
+	margin: 10px 0 20px;
+}
+
+.btn-register {
+	padding: 13px 168px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
 
 
