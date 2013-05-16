@@ -307,8 +307,8 @@ h1 .image-logo {
 .skedit-text-container-right {
 	position: absolute;
 	top: 85px;
-	right: 15px;
-	width: 480px;
+	right: 40px;
+	width: 430px;
 }
 
 .flt-right {
@@ -342,15 +342,18 @@ h1 .image-logo {
 	background-repeat: no-repeat;
 }
 
-.skedit-text-container-right {
-	position: absolute;
-	top: 85px;
-	right: 15px;
-	width: 480px;
+.skedit-box-image-code {
+	background-image: url(../images/code.png);
+	height: 462px;
+	width: 530px;
+	background-repeat: no-repeat;
 }
 
-.flt-right {
-	float:right;
+.skedit-text-container-left {
+	position: absolute;
+	top: 80px;
+	left: 40px;
+	width: 400px;
 }
 
 
@@ -402,7 +405,7 @@ h1 .image-logo {
 }
 
 .btn-next {
-	padding: 13px 175px;
+	padding: 13px 147px;
 	margin:0 5%;
 	letter-spacing: 3px;
 	text-transform: uppercase;
