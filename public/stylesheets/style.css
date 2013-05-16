@@ -297,7 +297,7 @@ h1 .image-logo {
 	position: relative;
 }
 
-.skedit-box-image {
+.skedit-box-image-receipt {
 	background-image: url(../images/receipt.png);
 	height: 462px;
 	width: 530px;
@@ -333,6 +333,24 @@ h1 .image-logo {
 	color: #797979;
 	font-weight: 300;
 	line-height: 1.7;
+}
+
+.skedit-box-image-network {
+	background-image: url(../images/network.png);
+	height: 462px;
+	width: 530px;
+	background-repeat: no-repeat;
+}
+
+.skedit-text-container-right {
+	position: absolute;
+	top: 85px;
+	right: 15px;
+	width: 480px;
+}
+
+.flt-right {
+	float:right;
 }
 
 
