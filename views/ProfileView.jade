@@ -21,14 +21,17 @@ block content
 
         div#hours
             p User's available hours:
+            input#addHour(type='button', value='Add date')
             if user.hours
                 for hour, day in user.hours
-                    p #{day}
                     for time in hour
-                        p #{time}
+                        div.availableHour
+                            select
+                                option #{day}
+                            select
+                                option #{time}
 
-        li#hours
-            input#addHour(type='button', value='Add date')
+
 
 
 block script
@@ -42,19 +45,20 @@ block script
                 fieldName: 'skill',
                 availableTags: res.tags,
                 allowSpaces: true,
-        ###
+
         days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
         hours = ['1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00']
         document.getElementById('addHour').onclick = (e) ->
+            newDiv = document.createElement 'div'
+            $(newDiv).attr 'class', 'availableHour'
+            $('#hours').append newDiv
             newSelect = document.createElement 'select'
-            $(newSelect).attr 'id', 'dayId'.concat ($('#hours').children().size() - 1)/2
             for day in days
                 option = new Option()
                 option.text = option.value = day
                 newSelect.options.add option
-            $('#hours').append newSe
+            $('.availableHour').last().append newSelect
             newSelect = document.createElement 'select'
-            $(newSelect).attr 'id', 'hourId'.concat ($('#hours').children().size() - 2)/2
             for hour in hours
                 option = new Option()
                 option.text = option.value = hour + ' AM'
@@ -63,11 +67,9 @@ block script
                 option = new Option()
                 option.text = option.value = hour + ' PM'
                 newSelect.options.add option
-            $('#hours').append newSelect
-        ###
+            $('.availableHour').last().append newSelect
 
 
-        #deal with duplicates here
         document.getElementById('addTags').onclick = (e) ->
             tags = $('.tagit-label').map(->
                 $(this).text()
