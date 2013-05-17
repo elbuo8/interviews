@@ -14,7 +14,7 @@ block content
             if user.skills
                 for object in user.skills
                     for points, skill in object
-                        p#userSkill #{skill} - #{points}
+                        p.userSkill #{skill} - #{points}
         div#skillEditor
             input#tags(type='text')
             button#addTags(type="button") Add skills
@@ -27,9 +27,13 @@ block content
                     for time in hour
                         p #{time}
 
+        li#hours
+            input#addHour(type='button', value='Add date')
+
 
 block script
     script(src='/components/jquery/jquery.min.js')
+    script(src='/js/underscore.js')
     script(src='/js/jquery-ui.js')
     script(src='/js/tagit.js')
     :coffeescript
@@ -38,17 +42,52 @@ block script
                 fieldName: 'skill',
                 availableTags: res.tags,
                 allowSpaces: true,
+        ###
+        days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        hours = ['1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00', '12:00']
+        document.getElementById('addHour').onclick = (e) ->
+            newSelect = document.createElement 'select'
+            $(newSelect).attr 'id', 'dayId'.concat ($('#hours').children().size() - 1)/2
+            for day in days
+                option = new Option()
+                option.text = option.value = day
+                newSelect.options.add option
+            $('#hours').append newSe
+            newSelect = document.createElement 'select'
+            $(newSelect).attr 'id', 'hourId'.concat ($('#hours').children().size() - 2)/2
+            for hour in hours
+                option = new Option()
+                option.text = option.value = hour + ' AM'
+                newSelect.options.add option
+            for hour in hours
+                option = new Option()
+                option.text = option.value = hour + ' PM'
+                newSelect.options.add option
+            $('#hours').append newSelect
+        ###
 
+
+        #deal with duplicates here
         document.getElementById('addTags').onclick = (e) ->
             tags = $('.tagit-label').map(->
-                skill = $(this).text()
-                JSON.parse('{\"' + skill + '\": 5}')
+                $(this).text()
             ).get()
-            json = {}
-            json['skills'] = tags
-            $.post '/user/addskill', json, (res) ->
-                if res == 'OK' or res == 200
-                    tags.forEach (element) ->
-                        skill = Object.keys(element)[0]
-                        $('#skills').append skill + ' - ' + element[skill]
 
+            currentTags = $('.userSkill').map(->
+                $(this).text().split('-')[0].replace RegExp(" ", "g"), ""
+            ).get()
+            tags = _.difference tags, currentTags
+            tags = (JSON.parse('{\"' + tag + '\": 5}') for tag in tags)
+
+            console.log tags
+            if tags.length > 0
+                json = {}
+                json['skills'] = tags
+                $.post '/user/addskill', json, (res) ->
+                    if res == 'OK' or res == 200
+                        $('.tagit-label').remove() #find better fix
+                        tags.forEach (element) ->
+                            skill = Object.keys(element)[0]
+                            $('#skills').append '<p class=\'userSkill\'>' + skill + ' - ' + element[skill] + '</p>'
+            else
+                $('.tagit-label').remove()
