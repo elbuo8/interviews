@@ -80,6 +80,8 @@ class userModel
     @users.update {_id: new ObjectID req.session._id}, {$set:{hours:req.body.hours}}, (error, user) ->
       if not error then res.send 200 else res.send 500
 
+  getFinder: (req, res) => res.render 'finder'
+
   auth: (req, res, next) =>
     if req.session._id then next() else res.redirect '/'
 
