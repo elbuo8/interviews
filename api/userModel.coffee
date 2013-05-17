@@ -66,13 +66,15 @@ class userModel
         else
           res.send {status: data.StatusCode}
 
-
-
   getProfile: (req, res) =>
     @users.findOne {_id: new ObjectID req.session._id}, (error, user) ->
       #console.log user, req.session._id
       owner = if (req.session._id == user._id) then true else false
       res.render 'ProfileView', {owner: owner, user: user}
+
+  addSkill: (req, res) =>
+    @users.update {_id: new ObjectID req.session._id}, {$push: {skills: {$each:req.body.skills}}}, (error, user) ->
+      if not error then res.send 200 else res.send 500
 
   auth: (req, res, next) =>
     if req.session._id then next() else res.redirect '/'

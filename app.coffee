@@ -46,10 +46,16 @@ app.configure () ->
               db.collection 'tags', (error, collection) ->
                 collection.distinct 'tag', (error, tags) ->
                   res.render 'createProfileView', {tags : tags}
+
+            app.get '/tags', (req, res) ->
+              db.collection 'tags', (error, collection) ->
+                collection.distinct 'tag', (error, tags) ->
+                  res.json {tags : tags}
             app.get '/createprofile', user.auth, user.createProfile
             app.post '/createprofile', user.auth, user.createProfile
             app.get '/user/photo', user.auth, user.getPhoto
             app.post '/user/photo', user.auth, user.setPhoto
+            app.post '/user/addskill', user.auth, user.addSkill
         else
           console.log error
 

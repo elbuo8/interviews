@@ -1,5 +1,7 @@
 extends layout
 block content
+    link(rel='stylesheet', href='stylesheets/jquery-ui.css')
+    link(rel='stylesheet', href='stylesheets/jquery.tagit.css')
     div
         div
             p Hello #{user.username}
@@ -8,13 +10,45 @@ block content
             img(src='#{user.photo}')
 
         div#skills
+            p User's skills:
             if user.skills
                 for object in user.skills
                     for points, skill in object
-                        p #{skill} - #{points}
+                        p#userSkill #{skill} - #{points}
+        div#skillEditor
+            input#tags(type='text')
+            button#addTags(type="button") Add skills
+
         div#hours
+            p User's available hours:
             if user.hours
                 for hour, day in user.hours
                     p #{day}
                     for time in hour
                         p #{time}
+
+
+block script
+    script(src='/components/jquery/jquery.min.js')
+    script(src='/js/jquery-ui.js')
+    script(src='/js/tagit.js')
+    :coffeescript
+        $.get '/tags', (res) ->
+            $('#tags').tagit
+                fieldName: 'skill',
+                availableTags: res.tags,
+                allowSpaces: true,
+
+        document.getElementById('addTags').onclick = (e) ->
+            tags = $('.tagit-label').map(->
+                skill = $(this).text()
+                JSON.parse('{\"' + skill + '\": 5}')
+            ).get()
+            json = {}
+            json['skills'] = tags
+            $.post '/user/addskill', json, (res) ->
+                if res == 'OK' or res == 200
+                    tags.forEach (element) ->
+                        skill = Object.keys(element)[0]
+                        $('#skills').append skill + ' - ' + element[skill]
+
