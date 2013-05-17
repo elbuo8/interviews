@@ -17,7 +17,7 @@ block content
                         p.userSkill #{skill} - #{points}
         div#skillEditor
             input#tags(type='text')
-            button#addTags(type="button") Add skills
+            button#addTags(type="button") Save skills
 
         div#hours
             p User's available hours:
@@ -30,6 +30,9 @@ block content
                                 option #{day}
                             select
                                 option #{time}
+
+        div#hourEditor
+            button#saveHours(type="button") Save hours
 
 
 
@@ -81,7 +84,6 @@ block script
             tags = _.difference tags, currentTags
             tags = (JSON.parse('{\"' + tag + '\": 5}') for tag in tags)
 
-            console.log tags
             if tags.length > 0
                 json = {}
                 json['skills'] = tags
@@ -93,3 +95,26 @@ block script
                             $('#skills').append '<p class=\'userSkill\'>' + skill + ' - ' + element[skill] + '</p>'
             else
                 $('.tagit-label').remove()
+
+        document.getElementById('saveHours').onclick = (e) ->
+            hours = {}
+            for div in $('.availableHour')
+                contents = $(div).html()
+                day = $(contents).first().children('option').filter(':selected').text()
+                hour = $(contents).last().children('option').filter(':selected').text()
+                console.log day, hour
+                if _.has hours, day
+                    console.log 'has it'
+                    hours[day].push hour
+                    hours[day] = _.uniq hours[day]
+                else
+                    console.log 'doesnt'
+                    hours[day] = [hour]
+
+            json = {}
+            json['hours'] = hours
+            console.log hours
+            $.post '/user/sethours', json, (res) ->
+                console.log res
+                if res == 'OK' or res == 200
+                    alert 'Saved'

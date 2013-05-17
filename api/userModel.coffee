@@ -76,6 +76,10 @@ class userModel
     @users.update {_id: new ObjectID req.session._id}, {$push: {skills: {$each:req.body.skills}}}, (error, user) ->
       if not error then res.send 200 else res.send 500
 
+  setHours: (req, res) =>
+    @users.update {_id: new ObjectID req.session._id}, {$set:{hours:req.body.hours}}, (error, user) ->
+      if not error then res.send 200 else res.send 500
+
   auth: (req, res, next) =>
     if req.session._id then next() else res.redirect '/'
 

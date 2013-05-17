@@ -56,6 +56,7 @@ app.configure () ->
             app.get '/user/photo', user.auth, user.getPhoto
             app.post '/user/photo', user.auth, user.setPhoto
             app.post '/user/addskill', user.auth, user.addSkill
+            app.post '/user/sethours', user.auth, user.setHours
         else
           console.log error
 
