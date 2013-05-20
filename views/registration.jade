@@ -3,11 +3,11 @@ form(id='registration', data-validate='parsley', data-show-errors='true')
     ul.form-list
       li
         input(id='username', type='text', name = 'username', placeholder = 'username', data-required='true')
-      li
+      li(style="margin-bottom:4%;")
         input(id='email', type='email', name = 'email', placeholder = 'email', data-required='true', data-type='email')
       li
         select
           option UPR - Mayaguez Campus
-      li
+      li(style="margin-bottom:4%;")
         input(id='password', type='password', name = 'password', placeholder = 'password', data-required='true', data-minlength='6')
-      button.btn-blue.btn-next(type='submit') Register
+      button.btn-blue.btn-next(type='submit') Next
