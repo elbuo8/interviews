@@ -43,8 +43,8 @@ block content
 
         if !(owner)
             div#inviteCreator
-                form(action="/invite/#{user._id}")
-                    button(type="submit")
+                button#createInvite(type='button')
+
 
 block script
     script(src='/components/jquery/jquery.min.js')
@@ -61,6 +61,20 @@ block script
                     if url.status == 200
                         $('#avatar').attr 'src', url.url
             }
+
+    if !(owner)
+        :coffeescript
+            document.getElementById('createInvite').onclick = (e) ->
+                $('#createInvite').fadeOut()
+                textarea = document.createElement('textarea')
+                textarea.setAttribute 'id', 'message'
+                $('#inviteCreator').append textarea
+                button = document.createElement('button')
+                button.setAttribute 'id', 'sendInvite'
+                $('#inviteCreator').append button
+
+            document.getElementById('sendInvite').onclick = (e) ->
+                console.log $('#message').val()
 
     :coffeescript
 
