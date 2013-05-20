@@ -4,12 +4,13 @@ block content
     link(rel='stylesheet', href='stylesheets/jquery.tagit.css')
     div
         div
-            p Hello #{user.username}
+            if (owner)
+                p Hello #{user.username}
             p Search link
-            a(href="/finder") Seach
+            a(href="/finder") Search
 
         div#photo
-            img(src='#{user.photo}')
+            img#avatar(src='#{user.photo}')
 
         div#skills(style="color:#c4c4c4;font-size: 14px;font-family: 'Proxima Nova';")
             p User's skills:
@@ -17,13 +18,15 @@ block content
                 for object in user.skills
                     for points, skill in object
                         p.userSkill #{skill} - #{points}
-        div#skillEditor
-            input#tags(type='text')
-            button#addTags(type="button") Save skills
+        if (owner)
+            div#skillEditor
+                input#tags(type='text')
+                button#addTags(type="button") Save skills
 
         div#hours
             p User's available hours:
-            input#addHour(type='button', value='Add date')
+            if (owner)
+                input#addHour(type='button', value='Add date')
             if user.hours
                 for hour, day in user.hours
                     for time in hour
@@ -33,18 +36,34 @@ block content
                             select
                                 option #{time}
 
-        div#hourEditor
-            button#saveHours(type="button") Save hours
 
+        if (owner)
+            div#hourEditor
+                button#saveHours(type="button") Save hours
 
-
+        if !(owner)
+            div#inviteCreator
+                form(action="/invite/#{user._id}")
+                    button(type="submit")
 
 block script
     script(src='/components/jquery/jquery.min.js')
     script(src='/js/underscore.js')
     script(src='/js/jquery-ui.js')
     script(src='/js/tagit.js')
+
+    if (owner)
+        script(src='js/dropzone.js')
+        :coffeescript
+            $('#avatar').dropzone {url: '/user/photo',
+            init: ->
+                this.on 'success', (file, url) ->
+                    if url.status == 200
+                        $('#avatar').attr 'src', url.url
+            }
+
     :coffeescript
+
         $.get '/tags', (res) ->
             $('#tags').tagit
                 fieldName: 'skill',

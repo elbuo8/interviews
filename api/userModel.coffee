@@ -8,6 +8,8 @@ s3 = new amazonS3.S3 {
   secretAccessKey: process.env.aws_secret,
   region: amazonS3.US_EAST_1
 }
+_ = require 'lodash'
+async = require 'async'
 
 class userModel
   constructor: (@users) ->
@@ -20,7 +22,7 @@ class userModel
         req.body.photo = gravatar.url(req.body.email, {s: '200'})
         @users.insert req.body, (error, result) -> #result viene en forma de array
           req.session._id = result[0]._id
-          res.send '200'
+          res.send 200
       else
         res.send 'Existing username or email'
 
@@ -66,10 +68,12 @@ class userModel
         else
           res.send {status: data.StatusCode}
 
+  #pass id by url
   getProfile: (req, res) =>
-    @users.findOne {_id: new ObjectID req.session._id}, (error, user) ->
-      #console.log user, req.session._id
-      owner = if (req.session._id == user._id) then true else false
+    id = if req.query.id? then req.query.id else req.session._id
+    @users.findOne {_id: new ObjectID id}, (error, user) ->
+      #console.log user._id.toString(), req.session._id
+      owner = if (req.session._id == user._id.toString()) then true else false
       res.render 'ProfileView', {owner: owner, user: user}
 
   addSkill: (req, res) =>
@@ -81,6 +85,22 @@ class userModel
       if not error then res.send 200 else res.send 500
 
   getFinder: (req, res) => res.render 'finder'
+
+
+  getFinderResults: (req, res) =>
+    ids = []
+    async.each req.body.skills, (skill, callback) =>
+      query = "{\"skills\": {\"$elemMatch\":{\"#{skill}\": {\"$exists\": true}}}}"
+      query = JSON.parse query
+      @users.find(query, {username: 1, photo: 1}).toArray (error, user) =>
+        ids = _.union ids, user
+        callback()
+    , (error) =>
+      console.log ids
+      index = _.findIndex ids, (id) => id._id.toString() is req.session._id
+      console.log index
+      ids.splice index if index > -1
+      res.render 'finderResults', {users: ids}
 
   auth: (req, res, next) =>
     if req.session._id then next() else res.redirect '/'
