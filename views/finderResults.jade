@@ -1,5 +1,7 @@
 if users.length > 0
   for user in users
-    p #{_id}
+    img(src="#{user.photo}")
+    p #{user.username}
+    a(href="/profile?id=#{user._id}") Profile
 else
   p No users match that

@@ -4,9 +4,10 @@ block content
     link(rel='stylesheet', href='stylesheets/jquery.tagit.css')
     div
         div
-            p Hello #{user.username}
+            if (owner)
+                p Hello #{user.username}
             p Search link
-            a(href="/finder") Seach
+            a(href="/finder") Search
 
         div#photo
             img(src='#{user.photo}')

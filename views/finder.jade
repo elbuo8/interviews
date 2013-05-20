@@ -1,13 +1,14 @@
 extends layout
 block content
   input#search(type="text", placeholder="Seach for skills separated by commas")
-  button#getSearch(type="button", ) Seach
+  button#getSearch(type="button", ) Search
   div#results
 
 block script
-  script(type="text/javascript", src="js/components/jquery/jquery.min.js")
+  script(src='/components/jquery/jquery.min.js')
   :coffeescript
     document.getElementById('getSearch').onclick = (e) ->
       if $('#search').val().length > 0
-        $.post '/find', {skills: $('#search').val().split(',')}, (html) ->
+        $.post '/finder', {skills: $('#search').val().split(',')}, (html) ->
+          console.log html
           $('#results').html html
