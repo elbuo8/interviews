@@ -5,7 +5,7 @@ block content
     div
         div
             if (owner)
-                p#isOwner Hello #{user.username}
+                p Hello #{user.username}
             p Search link
             a(href="/finder") Search
 
@@ -18,13 +18,15 @@ block content
                 for object in user.skills
                     for points, skill in object
                         p.userSkill #{skill} - #{points}
-        div#skillEditor
-            input#tags(type='text')
-            button#addTags(type="button") Save skills
+        if (owner)
+            div#skillEditor
+                input#tags(type='text')
+                button#addTags(type="button") Save skills
 
         div#hours
             p User's available hours:
-            input#addHour(type='button', value='Add date')
+            if (owner)
+                input#addHour(type='button', value='Add date')
             if user.hours
                 for hour, day in user.hours
                     for time in hour
@@ -34,11 +36,15 @@ block content
                             select
                                 option #{time}
 
-        div#hourEditor
-            button#saveHours(type="button") Save hours
 
+        if (owner)
+            div#hourEditor
+                button#saveHours(type="button") Save hours
 
-
+        if !(owner)
+            div#inviteCreator
+                form(action="/invite/#{user._id}")
+                    button(type="submit")
 
 block script
     script(src='/components/jquery/jquery.min.js')

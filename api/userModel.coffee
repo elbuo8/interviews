@@ -22,7 +22,7 @@ class userModel
         req.body.photo = gravatar.url(req.body.email, {s: '200'})
         @users.insert req.body, (error, result) -> #result viene en forma de array
           req.session._id = result[0]._id
-          res.send '200'
+          res.send 200
       else
         res.send 'Existing username or email'
 

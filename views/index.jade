@@ -74,7 +74,7 @@ block content
         password: $('#password').val()
 
       $.post '/registration', json, (data) ->
-        if data == '200'
+        if data == 200 or data == 'OK'
           $.get '/createprofile', (html) ->
             $('#currentStep').html html
         else
