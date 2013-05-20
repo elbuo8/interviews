@@ -5,12 +5,12 @@ block content
     div
         div
             if (owner)
-                p Hello #{user.username}
+                p#isOwner Hello #{user.username}
             p Search link
             a(href="/finder") Search
 
         div#photo
-            img(src='#{user.photo}')
+            img#avatar(src='#{user.photo}')
 
         div#skills
             p User's skills:
@@ -45,7 +45,19 @@ block script
     script(src='/js/underscore.js')
     script(src='/js/jquery-ui.js')
     script(src='/js/tagit.js')
+
+    if (owner)
+        script(src='js/dropzone.js')
+        :coffeescript
+            $('#avatar').dropzone {url: '/user/photo',
+            init: ->
+                this.on 'success', (file, url) ->
+                    if url.status == 200
+                        $('#avatar').attr 'src', url.url
+            }
+
     :coffeescript
+
         $.get '/tags', (res) ->
             $('#tags').tagit
                 fieldName: 'skill',
