@@ -58,7 +58,7 @@ app.configure () ->
             app.post '/user/addskill', user.auth, user.addSkill
             app.post '/user/sethours', user.auth, user.setHours
             app.get '/finder', user.auth, user.getFinder
-            app.post '/finder', user.auth, user.getFinderResults
+            #app.post '/finder', user.auth, user.getFinderResults
 
         else
           console.log error

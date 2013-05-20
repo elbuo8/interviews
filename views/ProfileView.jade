@@ -101,9 +101,10 @@ block script
         document.getElementById('saveHours').onclick = (e) ->
             hours = {}
             for div in $('.availableHour')
-                contents = $(div).html()
-                day = $(contents).first().children('option').filter(':selected').text()
-                hour = $(contents).last().children('option').filter(':selected').text()
+                console.log div
+                contents = $(div)
+                day = $(contents).children().first().val()
+                hour = $(contents).children().last().val()
                 console.log day, hour
                 if _.has hours, day
                     console.log 'has it'
