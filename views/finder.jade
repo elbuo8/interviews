@@ -10,5 +10,4 @@ block script
     document.getElementById('getSearch').onclick = (e) ->
       if $('#search').val().length > 0
         $.post '/finder', {skills: $('#search').val().split(',')}, (html) ->
-          console.log html
           $('#results').html html
