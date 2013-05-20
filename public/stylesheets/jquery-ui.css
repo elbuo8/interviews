@@ -465,10 +465,15 @@ button.ui-button::-moz-focus-inner {
 .ui-menu .ui-menu-item {
 	margin: 0;
 	padding: 0;
-	width: 100%;
-	/* support: IE10, see #8844 */
-	list-style-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
+	width: auto;
+	padding: 2px 2px 5px;
+	border-bottom: 1px solid #eee;
 }
+
+.ui-menu .ui-menu-item:hover {
+	background:#fbfbfb;
+}
+
 .ui-menu .ui-menu-divider {
 	margin: 5px -2px 5px -2px;
 	height: 0;
@@ -478,11 +483,13 @@ button.ui-button::-moz-focus-inner {
 }
 .ui-menu .ui-menu-item a {
 	text-decoration: none;
-	display: block;
 	padding: 2px .4em;
 	line-height: 1.5;
 	min-height: 0; /* support: IE7 */
 	font-weight: normal;
+	border:none;
+	background:transparent;
+	width: auto;
 }
 .ui-menu .ui-menu-item a.ui-state-focus,
 .ui-menu .ui-menu-item a.ui-state-active {
@@ -800,9 +807,16 @@ body .ui-tooltip {
 	font-size: 1em;
 }
 .ui-widget-content {
-	border: 1px solid #aaaaaa;
-	background: #ffffff url(images/ui-bg_flat_75_ffffff_40x100.png) 50% 50% repeat-x;
+	background: #fff;
+	border: 1px solid #eee;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: 0 1px 12px rgba(0,0,0,.08);
+	box-shadow: 0 1px 12px rgba(0,0,0,.08);
 	color: #222222;
+	font-family: "Proxima Nova";
+	font-size: 14px;
+	padding:0;
 }
 .ui-widget-content a {
 	color: #222222;
@@ -822,15 +836,22 @@ body .ui-tooltip {
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
-	border: 1px solid #d3d3d3;
-	background: #e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;
+	background:#ff4444;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ff4444), to(#ed0303));
+	background-image: -webkit-linear-gradient(top, #ff4444, #ed0303);
+	background-image: -moz-linear-gradient(top, #ff4444, #ed0303);
+	background-image: -o-linear-gradient(top, #ff4444, #ed0303);
+	background-image: -ms-linear-gradient(top, #ff4444, #ed0303);
+	background-image: linear-gradient(top, #ff4444, #ed0303);
+	text-shadow: 0 -1px rgba(0,0,0,0.5);
+	border:1px solid #ca0000;
 	font-weight: normal;
-	color: #555555;
+	color: white;
 }
 .ui-state-default a,
 .ui-state-default a:link,
 .ui-state-default a:visited {
-	color: #555555;
+	color: white;
 	text-decoration: none;
 }
 .ui-state-hover,
@@ -936,7 +957,10 @@ body .ui-tooltip {
 	background-image: url(images/ui-icons_222222_256x240.png);
 }
 .ui-state-default .ui-icon {
-	background-image: url(images/ui-icons_888888_256x240.png);
+	color:white;
+	font-size:14px;
+	font-weight: bolder;
+	font-family: "Proxima Nova";
 }
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon {

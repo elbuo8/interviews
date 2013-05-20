@@ -1,8 +1,21 @@
 ul.tagit {
-    padding: 1px 5px;
-    overflow: auto;
-    margin-left: inherit; /* usually we don't want the regular ul margins. */
-    margin-right: inherit;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -ms-transition: border linear 0.2s, box-shadow linear 0.2s;
+    -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+    transition: border linear 0.2s, box-shadow linear 0.2s;
+    height: auto;
+    float: left;
+    padding: 2px 7px;
+    width:18em;
 }
 ul.tagit li {
     display: block;
@@ -36,12 +49,12 @@ ul.tagit li.tagit-choice .tagit-close {
     right: .1em;
     top: 50%;
     margin-top: -8px;
-    line-height: 17px;
+    line-height: 17.9px;
 }
 
 /* used for some custom themes that don't need image icons */
 ul.tagit li.tagit-choice .tagit-close .text-icon {
-    display: none;
+    display: view;
 }
 
 ul.tagit li.tagit-choice input {
@@ -53,7 +66,9 @@ ul.tagit input[type="text"] {
     -moz-box-sizing:    border-box;
     -webkit-box-sizing: border-box;
     box-sizing:         border-box;
-
+    font-size: 14px;
+    font-family: "Proxima Nova";
+    color:#2a2a2a;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
     box-shadow: none;
