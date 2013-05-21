@@ -9,7 +9,13 @@ path = require("path")
 mongo = (require 'mongodb').MongoClient
 userModel = require './api/userModel'
 
+rtg   = (require("url")).parse(process.env.REDISTOGO_URL);
+redis = (require("redis")).createClient(rtg.port, rtg.hostname);
+
+redis.auth(rtg.auth.split(":")[1]);
 app = express()
+
+RedisStore = (require('connect-redis'))(express)
 
 app.configure () ->
   app.set "port", process.env.PORT or 3000
@@ -20,7 +26,12 @@ app.configure () ->
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use express.cookieParser 'aloha'
-  app.use express.session { secret: 'aloha', cookie: { maxAge: 600000 } }
+  app.use express.session { secret: 'aloha', store : new RedisStore {
+    host : rtg.hostname,
+    port : rtg.port,
+    db: rtg.auth.split(':')[0],
+    pass: rtg.auth.split(':')[1]
+    }}
 
   app.use app.router
   app.use express.static(path.join(__dirname, "public"))
