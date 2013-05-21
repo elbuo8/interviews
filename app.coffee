@@ -59,6 +59,7 @@ app.configure () ->
             app.post '/user/sethours', user.auth, user.setHours
             app.get '/finder', user.auth, user.getFinder
             app.post '/finder', user.auth, user.getFinderResults
+            app.post '/invite', user.auth, user.sendInvite
 
         else
           console.log error

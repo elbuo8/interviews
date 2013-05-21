@@ -10,6 +10,11 @@ s3 = new amazonS3.S3 {
 }
 _ = require 'lodash'
 async = require 'async'
+Sendgrid = require 'sendgrid-web'
+sendgrid = new Sendgrid({
+    user: process.env.sendgrid_user,
+    key: process.env.sendgrid_pwd
+  })
 
 class userModel
   constructor: (@users) ->
@@ -73,8 +78,11 @@ class userModel
     id = if req.query.id? then req.query.id else req.session._id
     @users.findOne {_id: new ObjectID id}, (error, user) ->
       #console.log user._id.toString(), req.session._id
-      owner = if (req.session._id == user._id.toString()) then true else false
-      res.render 'ProfileView', {owner: owner, user: user}
+      if (user)
+        owner = if (req.session._id == user._id.toString()) then true else false
+        res.render 'ProfileView', {owner: owner, user: user}
+      else
+        res.redirect '/'
 
   addSkill: (req, res) =>
     @users.update {_id: new ObjectID req.session._id}, {$push: {skills: {$each:req.body.skills}}}, (error, user) ->
@@ -96,11 +104,21 @@ class userModel
         ids = _.union ids, user
         callback()
     , (error) =>
-      console.log ids
       index = _.findIndex ids, (id) => id._id.toString() is req.session._id
-      console.log index
       ids.splice index if index > -1
       res.render 'finderResults', {users: ids}
+
+  sendInvite: (req, res) =>
+    @users.findOne {_id: new ObjectID req.session._id}, {email:1, username:1}, (error, sender) =>
+      @users.findOne {_id: new ObjectID req.body._id}, {email:1, username:1}, (error, receiver) =>
+        sendgrid.send
+          to: receiver.email,
+          from: 'yamil.asusta@upr.edu',
+          subject: 'New practice interview request!',
+          html: 'Hey! blah blah blah ' + req.body.message
+        , (error) =>
+            if not error then res.send 200 else 400
+
 
   auth: (req, res, next) =>
     if req.session._id then next() else res.redirect '/'

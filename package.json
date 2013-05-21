@@ -16,6 +16,7 @@
     "awssum-amazon": "~1.0.2",
     "awssum-amazon-s3": "~1.2.4",
     "lodash": "~1.2.1",
-    "async": "~0.2.8"
+    "async": "~0.2.8",
+    "sendgrid-web": "0.0.4"
   }
 }
